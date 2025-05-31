@@ -1,0 +1,81 @@
+bug
+""handleClose is not a function
+TypeError: handleClose is not a function""
+
+
+const handleClose is import from sign.js under login.js by using <login handleClose ={handleClose }/> 
+but const Login work under modal fun when it click on button from sign.js 
+<Tabs value={value}  onChange={handleChange}>
+<Tab label='Login'>Login</Tab>
+</Tabs>
+
+Login.js
+const Login = ({handleClose}) => {
+ const singInHandleSubmit = (e) => {
+    e.preventDefault();
+    const SignIndata = new FormData(e.currentTarget);
+    const actualSignData = {
+      email: SignIndata.get('signInEmail'),
+      signinPassword: SignIndata.get('Signin_password'),
+    }
+
+    if (actualSignData.email && actualSignData.signinPassword) {
+      setError({ status: true, msg: "Login Success", type: 'success' })
+      document.getElementById('SingInHandleSubmit').reset()
+      // ✅ Call the passed-in function to close modal
+
+      Navigate('/')
+      console.log(actualSignData)
+      handleClose();
+    }
+    else {
+      setError({ status: true, msg: "Login required all field", type: "error" })
+      document.getElementById('SingInHandleSubmit').reset()
+    }
+(
+    <>
+      {/* This is Sign-in Form */}
+
+      <Box id='SingInHandleSubmit' component='form' noValidate onSubmit={singInHandleSubmit}>
+        {error.status ? <Alert severity={error.type}>{error.msg}</Alert> : ''}
+        <TextField sx={style_TabPanel} id='signInEmail' name='signInEmail' label="Email" variant="outlined" />
+        <FormControl sx={style_TabPanel} variant="outlined">
+          <InputLabel htmlFor="Signin_password">Password</InputLabel>
+          <OutlinedInput id="Signin_password" name='Signin_password'
+            type={showSignInPassword ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label={
+                    showSignInPassword ? 'hide the password' : 'display the password'
+                  }
+                  onClick={handleClickShowSignInPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  onMouseUp={handleMouseUpPassword}
+                  edge="end"
+                >
+                  {showSignInPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label=" Password"
+          />
+        </FormControl>
+
+        <Box sx={style_TabPanel} textAlign=''>
+          <Button type='submit' variant='contained'>Login</Button>
+        </Box>
+        <NavLink sx={style_TabPanel} to='/'>Forgot Password</NavLink>
+      </Box>
+
+    </>
+
+  );
+}
+
+
+when I redirect to login page it doesn't come under, it come simple page and if I try to fill login form and try to submit this bug get 
+handleClose is not a function
+TypeError: handleClose is not a function
+ 
+
